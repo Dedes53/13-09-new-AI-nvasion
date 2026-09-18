@@ -1,14 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="favicon.png">
-    <title>AI-nvasion</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stop the Invasion</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <main class="game">
+        <h1>AI-nvasion</h1>
+
+        <pre id="message" class="message"></pre>
+
+        <section id="introActions" class="row">
+            <button id="stopBtn">Stop invasion</button>
+        </section>
+
+        <section id="gamePanel" class="hidden">
+            <div class="scoreboard">
+                <div>Humanity: <span id="playerScore">0</span></div>
+                <div>AI: <span id="compScore">0</span></div>
+                <div>Round: <span id="roundNum">1</span></div>
+            </div>
+
+            <div class="row">
+                <button class="choiceBtn" data-choice="rock">Rock</button>
+                <button class="choiceBtn" data-choice="paper">Paper</button>
+                <button class="choiceBtn" data-choice="scissors">Scissors</button>
+            </div>
+        </section>
+
+        <section id="replayPanel" class="hidden row">
+            <button id="replayYes">Yes</button>
+            <button id="replayNo">No</button>
+        </section>
+    </main>
+
     <script src="script.js"></script>
 </body>
 
