@@ -12,19 +12,13 @@
     <main class="game">
         <h1>AI-nvasion</h1>
 
-        <!-- <div id="scoreboard" class="hidden"> -->
-            <!-- <div>Round: <span id="roundNum">0</span></div>
-            <div>Humanity: <span id="playerScore">0</span></div>
-            <div>AI: <span id="compScore">0</span></div>
-        </div> -->
-
         <div id="messageShower">
             <pre id="message" class="message"></pre>
         </div>
         
-        <div class="hidden combat-panel">
-            <div class="hidden" id="player">YOU: <img src="/assets/paper.png" alt=""> </div>
-            <div class="hidden" id="computer">ME: </div>
+        <div class="hidden combat-panel" id="combat-panel">
+            <div class="choiceImg" id="player"></div>
+            <div class="choiceImg" id="computer"></div>
         </div>
 
         <section id="replayPanel" class="hidden">
@@ -37,7 +31,7 @@
         </section>
 
         <section id="gamePanel" class="hidden">
-            <div>Round:<span id="roundNum">0</span></div>
+            <div><span id="roundNum">0</span> Rounds Played</div>
             <div class="scoreboard">
                 <div>Humanity: <span id="playerScore">0</span></div>
                 <div> X </div>

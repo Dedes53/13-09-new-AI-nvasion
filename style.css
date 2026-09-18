@@ -124,6 +124,16 @@ button:hover:after{
 
 }
 
+.combat-panel{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+#plyId, #compId{
+    width: 40%;
+}
+
 #replayNo {
     background-color: rgb(229, 86, 86);
 }
@@ -135,7 +145,6 @@ button:hover:after{
 #replayYes, #replayNo {
     border-radius: 0.5em;
     border: none;
-    /* font-size: 1em; */
     position: relative;
     margin: 0.5em;
     padding: 10px 0;

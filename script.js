@@ -395,8 +395,7 @@ const DIALOGUE = {
     rematchWin: "You won the rematch!",
     rematchLose: "You lost the rematch!",
 
-    replayPrompt: "Do you want to play a new match? (yes/no)",
-    replayInvalid: "Invalid answer. Type yes or no.",
+    replayPrompt: "Do you want to play a new match?",
 };
 
 const messageEl = document.getElementById("message");
@@ -409,6 +408,7 @@ const playerScoreEl = document.getElementById("playerScore");
 const compScoreEl = document.getElementById("compScore");
 const roundNumEl = document.getElementById("roundNum");
 
+const combatPanel = document.getElementById("combat-panel");
 const replayPanel = document.getElementById("replayPanel");
 const replayYes = document.getElementById("replayYes");
 const replayNo = document.getElementById("replayNo");
@@ -456,7 +456,7 @@ function startGame() {
 
     introActions.classList.add("hidden");
     gamePanel.classList.remove("hidden");
-    // scoreboard.classList.remove("hidden");
+    scoreboard.classList.remove("hidden");
     replayPanel.classList.add("hidden");
 
     setChoicesEnabled(true);
@@ -474,6 +474,7 @@ function checkGameOver() {
 function askReplayUI() {
     waitingReplayAnswer = true;
     replayPanel.classList.remove("hidden");
+    combatPanel.innerHTML='';
 }
 
 function onReplayAnswer(answer) {
@@ -529,18 +530,46 @@ function computerPlay() {
     return choices[Math.floor(Math.random() * choices.length)];
 }
 
+function showImgChoice(selection, id) {
+    const choiceImg = document.getElementById(id);
+
+    switch(selection){
+        case 'rock':
+            choiceImg.src = '/assets/rock.png';
+            break;
+        case 'paper':
+            choiceImg.src = '/assets/paper.png';
+            break;
+        case 'scissors':
+            choiceImg.src = '/assets/scissors.png';
+            break;
+    }
+
+}
+
 function handleChoice(playerSelection) {
     if (gameOver || waitingReplayAnswer) return;
 
     const compSelection = computerPlay();
     const lines = [];
 
-    lines.push(`ROUND ${round}`);
-    lines.push(`YOU ${playerSelection} X ME ${compSelection}`);
-    
-    const choiceImg = document.createElement('img');
-    choiceImg.src = '/assets/paper.png'
-    document.getElementById('player').appendChild(choiceImg);
+    // lines.push(`ROUND ${round}`);
+    // lines.push(`YOU ${playerSelection} X ME ${compSelection}`);
+    const playerChoiceImgId = 'plyId';
+    const compChoiceImgId = 'compId';
+
+    if(round == 0) {
+        combatPanel.classList.remove("hidden");
+        const playerChoiceImg = document.createElement('img');
+        playerChoiceImg.id = playerChoiceImgId;
+        const compChoiceImg = document.createElement('img');
+        compChoiceImg.id = compChoiceImgId;
+        document.getElementById('player').appendChild(playerChoiceImg);
+        document.getElementById('computer').appendChild(compChoiceImg);
+    }
+
+    showImgChoice(playerSelection, playerChoiceImgId);
+    showImgChoice(compSelection, compChoiceImgId);
 
     const outcome = playRound(playerSelection, compSelection);
 
