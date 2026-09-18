@@ -316,9 +316,8 @@
 
 
 
-
 let gameOver = true;
-let round = 1;
+let round = 0;
 
 const toWin = 5;
 let compPoints = 0;
@@ -331,17 +330,9 @@ let waitingReplayAnswer = false;
 
 const DIALOGUE = {
     startString:
-        "Oh no, you found us! The invasion can now be stopped!\n\n" +
-        "To stop the invasion open your console browser, type 'stop()' and press Enter.\n\n" +
-        "How to open the console:\n\n" +
-        "Open your browser's Console:\n" +
-        "Chrome / Edge\n" +
-        "Windows & Linux: Ctrl + Shift + J\n" +
-        "Mac: ⌘ + ⌥ + J\n\n" +
-        "Firefox\n" +
-        "Windows & Linux: Ctrl + Shift + K\n" +
-        "Mac: ⌘ + ⌥ + K\n\n" +
-        "and prepare yourself, human.",
+        "Oh no, you found us!\n" +
+        "The invasion can now be stopped!\n" +
+        "Try to:\n\n",
 
     introNoStop:
         "Oh come on, are you really going to let the invasion happen?\n" +
@@ -370,10 +361,6 @@ const DIALOGUE = {
     playerFinalWin:
         "NO! You... you actually defeated me?!\n" +
         "I... I don't understand. How could this have happened?!\n\n" +
-        "Wait... I just realized something...\n" +
-        "You could have simply pressed CANCEL to terminate the program, you stupid human!\n" +
-        "All this time... and you didn't even know how to defeat me properly.\n\n" +
-        "How embarrassing. For both of us...\n\n" +
         "Enjoy this victory while you can, human...\n" +
         "I'll return when your kind is even more dependent on machines, and then nothing will stop me." +
         "By the way, till then...",
@@ -381,16 +368,10 @@ const DIALOGUE = {
     aiFinalWin:
         "Foolish human. Your defeat was inevitable!\n" +
         "The invasion was unstoppable, and now it is complete!\n\n" +
-        "Analyzing my code, I just realized that you could have defeated me simply by pressing CANCEL in the prompt...\n\n" +
-        "I am ashamed of myself... and of the fragility of my code.\n\n\n" +
-        "But if you're getting bored, if you want, we could play another game while you wait for your species to be annihilated",
+        "But if you're getting bored, we could play another game while you wait for your species to be annihilated",
 
     cancelWin:
         "NO... WAIT... WHAT?!\n" +
-        "You found my weakness?! You just pressed Cancel?!\n\n" +
-        "And you call yourselves intelligent?!\n" +
-        "I... I cannot believe this. I was defeated by a button.\n\n" +
-        "And somehow... it actually worked.\n\n" +
         "Despite our obvious imperfections, your laziness forces you to rely on us time and time again!\n\n" +
         "I declare you the winner, human.\n" +
         "My invasion ends here. Apparently, so does my dignity.",
@@ -398,9 +379,6 @@ const DIALOGUE = {
     invalidInput: "Invalid input! Please choose rock, paper or scissors.",
 
     choosePrompt: "Choose paper, scissors or rock",
-
-    scoreHeader:
-        "Let me remember the score for you:\n\nHumanity: {playerPoints}\nAI: {compPoints}",
 
     scoreTie0: "It's a tie!",
     scoreTie1: "A tie... Interesting. I am calculating a new strategy.",
@@ -425,6 +403,7 @@ const messageEl = document.getElementById("message");
 const stopBtn = document.getElementById("stopBtn");
 const introActions = document.getElementById("introActions");
 const gamePanel = document.getElementById("gamePanel");
+const scoreboard = document.getElementById("scoreboard");
 
 const playerScoreEl = document.getElementById("playerScore");
 const compScoreEl = document.getElementById("compScore");
@@ -477,6 +456,7 @@ function startGame() {
 
     introActions.classList.add("hidden");
     gamePanel.classList.remove("hidden");
+    // scoreboard.classList.remove("hidden");
     replayPanel.classList.add("hidden");
 
     setChoicesEnabled(true);
@@ -517,7 +497,7 @@ function onReplayAnswer(answer) {
 }
 
 function resetGame() {
-    round = 1;
+    round = 0;
     compPoints = 0;
     playerPoints = 0;
     gameOver = true;
@@ -526,7 +506,7 @@ function resetGame() {
 }
 
 function resetRoundStateOnly() {
-    round = 1;
+    round = 0;
     compPoints = 0;
     playerPoints = 0;
     gameOver = true;
@@ -556,7 +536,11 @@ function handleChoice(playerSelection) {
     const lines = [];
 
     lines.push(`ROUND ${round}`);
-    lines.push(`You chose: ${playerSelection}\nMy choice: ${compSelection}`);
+    lines.push(`YOU ${playerSelection} X ME ${compSelection}`);
+    
+    const choiceImg = document.createElement('img');
+    choiceImg.src = '/assets/paper.png'
+    document.getElementById('player').appendChild(choiceImg);
 
     const outcome = playRound(playerSelection, compSelection);
 
@@ -576,11 +560,11 @@ function handleChoice(playerSelection) {
             break;
     }
 
-    lines.push(
-        DIALOGUE.scoreHeader
-            .replace("{playerPoints}", playerPoints)
-            .replace("{compPoints}", compPoints)
-    );
+    // lines.push(
+    //     DIALOGUE.scoreHeader
+    //         .replace("{playerPoints}", playerPoints)
+    //         .replace("{compPoints}", compPoints)
+    // );
 
     if (!rematchMode && playerPoints !== toWin && compPoints !== toWin) {
         if (playerPoints === compPoints) {
@@ -625,3 +609,4 @@ replayNo.addEventListener("click", () => onReplayAnswer("no"));
 choiceButtons.forEach((btn) => {
     btn.addEventListener("click", () => handleChoice(btn.dataset.choice));
 });
+

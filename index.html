@@ -12,17 +12,36 @@
     <main class="game">
         <h1>AI-nvasion</h1>
 
-        <pre id="message" class="message"></pre>
+        <!-- <div id="scoreboard" class="hidden"> -->
+            <!-- <div>Round: <span id="roundNum">0</span></div>
+            <div>Humanity: <span id="playerScore">0</span></div>
+            <div>AI: <span id="compScore">0</span></div>
+        </div> -->
+
+        <div id="messageShower">
+            <pre id="message" class="message"></pre>
+        </div>
+        
+        <div class="hidden combat-panel">
+            <div class="hidden" id="player">YOU: <img src="/assets/paper.png" alt=""> </div>
+            <div class="hidden" id="computer">ME: </div>
+        </div>
+
+        <section id="replayPanel" class="hidden">
+            <button id="replayYes">Yes</button>
+            <button id="replayNo">No</button>
+        </section>
 
         <section id="introActions" class="row">
             <button id="stopBtn">Stop invasion</button>
         </section>
 
         <section id="gamePanel" class="hidden">
+            <div>Round:<span id="roundNum">0</span></div>
             <div class="scoreboard">
                 <div>Humanity: <span id="playerScore">0</span></div>
+                <div> X </div>
                 <div>AI: <span id="compScore">0</span></div>
-                <div>Round: <span id="roundNum">1</span></div>
             </div>
 
             <div class="row">
@@ -30,11 +49,6 @@
                 <button class="choiceBtn" data-choice="paper">Paper</button>
                 <button class="choiceBtn" data-choice="scissors">Scissors</button>
             </div>
-        </section>
-
-        <section id="replayPanel" class="hidden row">
-            <button id="replayYes">Yes</button>
-            <button id="replayNo">No</button>
         </section>
     </main>
 
