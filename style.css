@@ -2,13 +2,17 @@
     --bg-color: #007BFF;
     --choice-color: linear-gradient(to right, #00dbf1, #f9f871);
 
-    /* #00dbf1 */
-    /* #6efacc */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
 }
 
 body{
     background-color: var(--bg-color);
     color: white;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;
+    font-size: 1.5em;
     text-align: center;
 }
 
@@ -23,7 +27,6 @@ body{
 
 #message{
     /* animation: type 4s steps(60, end);  */
-    font-size: 1.5em;
     /* text-align: center; */
     /* margin: 10px 0 0 10px; */
     /* overflow: hidden; */
@@ -75,6 +78,11 @@ body{
     width: 20px;
 }
 
+button:hover {
+  filter: brightness(1.15);
+  transform: translateY(-2px);
+}
+
 button:after {
     background-color: rgba(255,255,255,0.4);
     border-radius: 0.5em;
@@ -123,6 +131,7 @@ button:hover:after{
 #replayPanel {
 
 }
+
 
 .combat-panel{
     align-items: center;
